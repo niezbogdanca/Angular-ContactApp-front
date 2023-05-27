@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table *ngIf="contacts.length > 0; else noContactsAlert" class="table table-striped">
     <thead>
         <tr>
             <th>Lp.</th>
@@ -16,3 +16,7 @@
         </tr>
     </tbody>
 </table>
+
+<ng-template #noContactsAlert>
+    <p class="no-contacts">W tym momencie brak danych...</p>
+</ng-template>
