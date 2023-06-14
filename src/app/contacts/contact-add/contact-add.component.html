@@ -1,0 +1,33 @@
+<app-header>
+    <span content *ngIf="id">Modyfikacja kontaktu</span>
+    <span content *ngIf="id==undefined">Dodawanie nowego kontaktu</span>
+</app-header>
+
+<form [formGroup]="addForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Nazwisko</mat-label>
+        <input formControlName="surname" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Imię</mat-label>
+        <input formControlName="firstName" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Nr telefonu</mat-label>
+        <input formControlName="phoneNumber" matInput maxlength="9">
+    </mat-form-field>
+    <button (click)="addForm.reset()" mat-stroked-button color="warn"><mat-icon>delete</mat-icon>Usuń</button>
+    <button *ngIf="id==undefined" (click)="saveContact()" [disabled]="addForm.invalid" mat-stroked-button color="primary"><mat-icon>save</mat-icon>Zapisz</button>
+    <button *ngIf="id" (click)="modContact()" [disabled]="addForm.invalid" mat-stroked-button color="primary"><mat-icon>modify</mat-icon>Modyfikuj</button>
+</form>
+<mat-divider></mat-divider>
+<button [routerLink]="['/contacts-list']" mat-stroked-button color="accent"><mat-icon>arrow_back</mat-icon>Wstecz</button>
+<pre>
+    {{addForm.value | json}}
+</pre>
+<pre>
+    {{addForm.invalid | json}}
+</pre>
+<pre>
+    {{addForm.valid | json}}
+</pre>

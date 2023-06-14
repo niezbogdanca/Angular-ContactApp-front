@@ -1,3 +1,7 @@
+<app-header>
+    <span content>To jest lista wszystkich kontaktów</span>
+</app-header>
+
 <table *ngIf="contacts.length > 0; else noContactsAlert" class="table table-striped">
     <thead>
         <tr>
@@ -5,6 +9,7 @@
             <th>Nazwisko</th>
             <th>Imię</th>
             <th>Nr telefonu</th>
+            <th>Opcje</th>
         </tr>
     </thead>
     <tbody>
@@ -13,9 +18,21 @@
             <td>{{contact.surname}}</td>
             <td>{{contact.firstName}}</td>
             <td>{{contact.phoneNumber}}</td>
+            <td>
+                <button (click)="delContact(contact.id)" mat-mini-fab color="warn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button [routerLink]="['/contact-add', contact.id]" mat-mini-fab color="accent">
+                    <mat-icon>edits</mat-icon>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
+
+<button [routerLink]="['/contact-add']" mat-fab color="primary" matTooltip="Dodaj nowy kontakt">
+    <mat-icon>add</mat-icon>
+</button>
 
 <ng-template #noContactsAlert>
     <p class="no-contacts">W tym momencie brak danych...</p>
